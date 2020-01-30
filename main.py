@@ -8,7 +8,7 @@ class APO:
     def __init__(self):
         self.root = tkinter.Tk()
         self.histogram = Histogram(self.root)
-        self.img_cv = None
+        self.img_cv = ''
         self.image = None
         self.imageType = None
         self.initializeui()
