@@ -5,7 +5,9 @@ import cv2
 from PIL import ImageTk, Image
 
 class APO:
+    """Main class"""
     def __init__(self):
+        """Initialization"""
         self.root = tkinter.Tk()
         self.histogram = Histogram(self.root)
         self.img_cv = ''
@@ -14,6 +16,10 @@ class APO:
         self.initializeui()
 
     def initializeui(self):
+        """
+        Initialize UI using TKinter
+        @:param None
+        """
         self.root.configure(background='grey')
 
         #Set GUI
@@ -43,7 +49,10 @@ class APO:
         self.root.mainloop()
 
     def load_mono(self):
-        """Load image as greyscale"""
+        """
+        Load image as greyscale
+        @:param None
+        """
         self.openimage()
         if self.root.filename is None:
             return
@@ -53,7 +62,10 @@ class APO:
         self.imageType = 'mono'
 
     def load_color(self):
-        """Load Color image"""
+        """
+        Load Color image
+        @:param None
+        """
         self.openimage()
         if self.root.filename is None:
             return
@@ -63,7 +75,10 @@ class APO:
         self.imageType = 'color'
 
     def openimage(self):
-        """Open image path"""
+        """
+        Open image path
+        @:param None
+        """
         self.root.filename = filedialog.askopenfilename(initialdir="./", title="Select file", filetypes=(
             ("jpeg files", "*.jpg"), ("png files", "*.png"), ("all files", "*.*")))
 

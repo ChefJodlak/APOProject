@@ -8,10 +8,15 @@ import cv2
 from tkinter import messagebox
 
 class Histogram:
+    """Class for histogram"""
     def __init__(self, root):
+        """Initialization"""
         self.root = root
 
     def histogram2d(self, img):
+        """Generate histogram 2d using cv2 function
+        @:param img CV2 image
+        """
         try:
             self.img_cv = img
             channels = cv2.split(self.img_cv)
@@ -40,6 +45,12 @@ class Histogram:
 
 
     def histogram3d(self, img, type):
+        """
+        Check if image is color or mono, then use proper function
+        @:param img CV2 Image
+        @:param type color or mono
+
+        """
         try:
             if type == 'color':
                 self.histogram3dcolor(img)
@@ -49,6 +60,10 @@ class Histogram:
             self.displayerror()
 
     def histogram3dcolor(self, img):
+        """
+        Generate histogram 3d using cv2 function
+        @:param img CV2 image
+        """
         hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
         h, s, v = cv2.split(hsv)
         fig = plt.figure()
@@ -68,6 +83,10 @@ class Histogram:
         plt.show()
 
     def histogram3dmono(self, img):
+        """
+        Generate histogram 3d using cv2 function
+        @:param img CV2 image
+        """
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
         xs = np.arange(256)
