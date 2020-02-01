@@ -10,8 +10,11 @@ from tkinter import messagebox
 class Histogram:
     """Class for histogram"""
     def __init__(self, root):
-        """Initialization"""
-        self.root = root
+        """
+        Initialization
+        @:param root root ui
+        """
+        self.root = root 
 
     def histogram2d(self, img):
         """Generate histogram 2d using cv2 function
@@ -68,15 +71,17 @@ class Histogram:
         h, s, v = cv2.split(hsv)
         fig = plt.figure()
 
+        #create subplot
         ax = fig.add_subplot(111, projection='3d')
+        #split colors and iterate over tem
         for x, c, z in zip([h, s, v], ['r', 'g', 'b'], [30, 20, 10]):
             xs = np.arange(256)
             ys = cv2.calcHist([x], [0], None, [256], [0, 256])
             cs = [c] * len(xs)
             cs[0] = 'c'
-
+            #create bars
             ax.bar(xs, ys.ravel(), zs=z, zdir='y', color=cs, alpha=0.8)
-
+        #set labels on histogram
         ax.set_xlabel('X')
         ax.set_ylabel('Y')
         ax.set_zlabel('Z')
@@ -88,17 +93,22 @@ class Histogram:
         @:param img CV2 image
         """
         fig = plt.figure()
+        #create subplot
         ax = fig.add_subplot(111, projection='3d')
         xs = np.arange(256)
         ys = cv2.calcHist([img], [0], None, [256], [0, 256])
         cs = '#ff8080'
-
+        #create histogram
         ax.bar(xs, ys.ravel(), zs=5, zdir='y', color=cs, alpha=0.8)
-
+        #set labels on histogram
         ax.set_xlabel('Pixels')
         ax.set_ylabel('')
         ax.set_zlabel('Color value')
         plt.show()
 
     def displayerror(self):
+        """
+        Display error message
+        @:param No ne
+        """
         messagebox.showerror("Error", "Please open image first")

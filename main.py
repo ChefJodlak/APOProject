@@ -7,7 +7,10 @@ from PIL import ImageTk, Image
 class APO:
     """Main class"""
     def __init__(self):
-        """Initialization"""
+        """
+        Initialization
+        @:param None
+        """
         self.root = tkinter.Tk()
         self.histogram = Histogram(self.root)
         self.img_cv = ''
@@ -31,7 +34,7 @@ class APO:
         self.center.grid(row=0, column=1, padx=10, pady=5)
         self.right_frame = tkinter.Frame(self.root, width=800, height=400, bg='grey')
         self.right_frame.grid(row=0, column=2, padx=10, pady=5)
-        self.image = Image.open('bg.png')
+        self.image = Image.open('bg.png') #Starting image
         self.image = ImageTk.PhotoImage(self.image)
         self.showimage = tkinter.Label(self.center, image=self.image).grid(row=0, column=0, padx=5, pady=5)
 
@@ -57,7 +60,7 @@ class APO:
         if self.root.filename is None:
             return
 
-        self.img_cv = cv2.imread(self.root.filename, cv2.IMREAD_GRAYSCALE)
+        self.img_cv = cv2.imread(self.root.filename, cv2.IMREAD_GRAYSCALE) #read image
         self.setimage()
         self.imageType = 'mono'
 
@@ -66,12 +69,12 @@ class APO:
         Load Color image
         @:param None
         """
-        self.openimage()
+        self.openimage() #open image
         if self.root.filename is None:
             return
 
         self.img_cv = cv2.imread(self.root.filename)
-        self.setimage()
+        self.setimage() #set image on ui
         self.imageType = 'color'
 
     def openimage(self):
@@ -80,14 +83,17 @@ class APO:
         @:param None
         """
         self.root.filename = filedialog.askopenfilename(initialdir="./", title="Select file", filetypes=(
-            ("jpeg files", "*.jpg"), ("png files", "*.png"), ("all files", "*.*")))
+            ("jpeg files", "*.jpg"), ("png files", "*.png"), ("all files", "*.*"))) #find file
 
     def setimage(self):
-        """Display image on UI"""
-        image = cv2.cvtColor(self.img_cv, cv2.COLOR_BGR2RGB)
-        image = Image.fromarray(image)
+        """
+        Display image on UI
+        @:param None
+        """
+        image = cv2.cvtColor(self.img_cv, cv2.COLOR_BGR2RGB) #set correct colors
+        image = Image.fromarray(image) 
         image.thumbnail((800, 600))
         self.image = ImageTk.PhotoImage(image=image)
-        self.showimage = tkinter.Label(self.center, image=self.image).grid(row=0, column=0, padx=5, pady=5)
+        self.showimage = tkinter.Label(self.center, image=self.image).grid(row=0, column=0, padx=5, pady=5) #show image
 
 apo = APO()
