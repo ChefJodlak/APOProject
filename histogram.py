@@ -21,6 +21,7 @@ class Histogram:
         @:param img: CV2 image
         """
         try:
+            plt.close("all")
             rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) # Ustawienie kolorów RGB
             hist = cv2.calcHist([rgb], [0, 1], None, [256, 256], [0, 256, 0, 256]) # Obliczenie histogramu
 
@@ -89,17 +90,22 @@ class Histogram:
         Display histogram 3d for Image where operations were used
         @:param img: CV2 image
         """
-        image = self.tweakimage3d(img) # Użyj Dylatacji i Laplacian na obrazie
-        self.generatehistogram3d(image) # Wygeneruj histogram 3d
+        if img != '':
+            image = self.tweakimage3d(img) # Użyj Dylatacji i Laplacian na obrazie
+            self.generatehistogram3d(image) # Wygeneruj histogram 3d
+        else:
+            self.displayerror()  # Wyświetl błąd
 
     def display2doperations(self, img):
         """
         Display histogram 2d for Image where operations were used
         @:param img: CV2 image
         """
-        image = self.tweakimage2d(img) # Użyj Dylatacji na obrazie
-        self.histogram2d(image) # Wygeneruj histogram 2d
-
+        if img != '':
+            image = self.tweakimage2d(img) # Użyj Dylatacji na obrazie
+            self.histogram2d(image) # Wygeneruj histogram 2d
+        else:
+            self.displayerror()  # Wyświetl błąd
     def displayerror(self):
         """
         Display error message
